@@ -16,3 +16,7 @@ as well as marking tasks as completed. Designed for easy use, with a responsive 
 <span><strong>Tech Stack</strong>: Spring Boot, Thymeleaf, HTML/CSS, MySQL</span>
 <br>
 <span style="font-style: italic">Note: Improvements to be done.</span>
+<br>
+
+![ToDo App Screenshot](src/main/resources/static/CSS/images/ToDo_1.png)
+![ToDo App Screenshot](src/main/resources/static/CSS/images/ToDo_2.png)
