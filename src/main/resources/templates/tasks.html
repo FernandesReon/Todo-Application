@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Todo Application</title>
+     <link rel="stylesheet" th:href="@{/CSS/style.css}">
+<!--    <link rel="stylesheet" href="style.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+<div class="container">
+    <h1>Todo App</h1>
+    <form action="/tasks" method="post">
+        <input type="text" name="title" id="new_task" placeholder="Write anything and hit enter to add."
+               autocomplete="off" required>
+        <!-- <textarea name="task_description" id="description" rows="5"
+        placeholder="A Short description about the task."></textarea> -->
+        <button type="submit" class="add_button">Add</button>
+    </form>
+
+    <div class="display_task">
+        <th:block th:each="task : ${taskList}">
+            <ul>
+                <div class="task_info">
+                    <div>
+                        <li th:classappend="${task.completed} ? 'text-strikethrough'"
+                            th:text="${task.title}">Some random text to be displayed here.
+                        </li>
+                    </div>
+                    <div class="vital-btns">
+                        <!-- Toggle Button -->
+                        <a th:href="@{/{id}/toggle(id=${task.id})}" id="toggle-line" title="Mark as Complete.">
+                            <i class="fa-solid fa-circle-check"> </i>
+                        </a>
+
+                        <!-- Delete Button -->
+                        <a th:href="@{/{id}/delete(id=${task.id})}" id="delete_task" title="Delete the task.">
+                            <i class="fa-solid fa-circle-minus"></i>
+                        </a>
+
+                        <!-- Edit Button -->
+                        <!-- <a th:href="@{/{id}/edit(id=${task.id})}">
+                            <i class="fa-solid fa-square-pen" style="color: #4e76f8 ;"></i>
+                        </a> -->
+                    </div>
+                </div>
+            </ul>
+        </th:block>
+    </div>
+
+</div>
+</body>
+
+</html>

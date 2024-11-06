@@ -1,0 +1,159 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --background-color: #121212;
+    --primary-color: #1c1d20;
+    --secondary-color: #a0a0a8;
+    --accent-color: #00ffc4;
+    --text-color: #f9f9f9;
+
+    --alert-color: #ff003b;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+body,
+button,
+input,
+textarea{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+.container{
+    width: 100%;
+    max-width: 50rem;
+    height: auto;
+    border: 2px solid var(--secondary-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    transition: .5s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.container h1{
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    text-align: center;
+    margin: 0.5rem auto;
+}
+
+form{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-grow: 0;
+}
+
+#new_task,
+#description{
+    width: 100%;
+    padding: 0.6rem 1.2rem;
+    background: none;
+    outline: none;
+    color: var(--secondary-color);
+    caret-color: var(--accent-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 1.5rem;
+    font-size: 1rem;
+}
+
+#new_task:focus,
+#description:focus{
+    border: 2px solid var(--accent-color);
+}
+
+#description{
+    resize: none;
+    margin-top: 0.4rem;
+}
+
+.add_button{
+    width: 20%;
+    background: var(--accent-color);
+    margin-top: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.display_task{
+    margin-top: 0.8rem;
+    width: 100%;
+}
+
+.task_info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding: 0.6em 1.2rem;
+    margin-bottom: 0.5rem;
+    border: 2px solid;
+    border-radius: 1.5rem;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.text-strikethrough{
+    text-decoration: line-through;
+    color: var(--secondary-color);
+}
+
+.vital-btns i{
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.vital-btns a:not(:last-child){
+    margin-right: 0.6rem;
+}
+
+.fa-circle-check{
+    color: var(--accent-color);
+}
+
+.fa-circle-minus{
+    color: var(--alert-color);
+}
+
+@media screen and (max-width: 425px) {
+    .add_button{
+        width: 100%;
+    }
+}
