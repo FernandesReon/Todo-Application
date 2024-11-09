@@ -22,10 +22,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void createTask(String title) {
+    public void createTask(String title, String task_description) {
         LOGGER.info("New Task Created..");
         Task task = new Task();
         task.setTitle(title);
+        task.setDescription(task_description);
         task.setCompleted(false);
         taskRepository.save(task);
     }

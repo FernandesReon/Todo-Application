@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Todo Application</title>
      <link rel="stylesheet" th:href="@{/CSS/style.css}">
-<!--    <link rel="stylesheet" href="style.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -20,8 +19,8 @@
     <form action="/tasks" method="post">
         <input type="text" name="title" id="new_task" placeholder="Write anything and hit enter to add."
                autocomplete="off" required>
-        <!-- <textarea name="task_description" id="description" rows="5"
-        placeholder="A Short description about the task."></textarea> -->
+        <textarea name="task_description" id="description" rows="3"
+                  placeholder="A Short description about the task." autocomplete="off"></textarea>
         <button type="submit" class="add_button">Add</button>
     </form>
 
@@ -30,8 +29,8 @@
             <ul>
                 <div class="task_info">
                     <div>
-                        <li th:classappend="${task.completed} ? 'text-strikethrough'"
-                            th:text="${task.title}">Some random text to be displayed here.
+                        <li th:classappend="${task.completed} ? 'text-strikethrough'" th:text="${task.title}">Some
+                            random text to be displayed here.
                         </li>
                     </div>
                     <div class="vital-btns">
@@ -44,12 +43,13 @@
                         <a th:href="@{/{id}/delete(id=${task.id})}" id="delete_task" title="Delete the task.">
                             <i class="fa-solid fa-circle-minus"></i>
                         </a>
-
-                        <!-- Edit Button -->
-                        <!-- <a th:href="@{/{id}/edit(id=${task.id})}">
-                            <i class="fa-solid fa-square-pen" style="color: #4e76f8 ;"></i>
-                        </a> -->
                     </div>
+                    <th:block th:if="${task.description != ''}">
+                        <p id="main-description" th:text="${task.description}">
+                            This section is for description, related to task.
+                        </p>
+                    </th:block>
+
                 </div>
             </ul>
         </th:block>

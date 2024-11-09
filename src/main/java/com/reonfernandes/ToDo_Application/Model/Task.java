@@ -14,5 +14,6 @@ public class Task {
 
     @Column(name = "todo_title", nullable = false)
     private String title;
+    private String description;
     private boolean completed;
 }
