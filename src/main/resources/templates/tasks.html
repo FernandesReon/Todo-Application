@@ -1,61 +1,80 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Todo Application</title>
-     <link rel="stylesheet" th:href="@{/CSS/style.css}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple todo application made using spring boot to test my skills">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>ToDo App</title>
 </head>
 
 <body>
+<h1 class="project_name">Todo App</h1>
 <div class="container">
-    <h1>Todo App</h1>
-    <form action="/tasks" method="post">
-        <input type="text" name="title" id="new_task" placeholder="Write anything and hit enter to add."
-               autocomplete="off" required>
-        <textarea name="task_description" id="description" rows="3"
-                  placeholder="A Short description about the task." autocomplete="off"></textarea>
-        <button type="submit" class="add_button">Add</button>
-    </form>
+    <button class="modal_button" onclick="openModal()">
+        Add task
+        <ion-icon name="add-circle"></ion-icon>
+    </button>
 
-    <div class="display_task">
-        <th:block th:each="task : ${taskList}">
-            <ul>
-                <div class="task_info">
-                    <div>
-                        <li th:classappend="${task.completed} ? 'text-strikethrough'" th:text="${task.title}">Some
-                            random text to be displayed here.
-                        </li>
-                    </div>
-                    <div class="vital-btns">
-                        <!-- Toggle Button -->
-                        <a th:href="@{/{id}/toggle(id=${task.id})}" id="toggle-line" title="Mark as Complete.">
-                            <i class="fa-solid fa-circle-check"> </i>
-                        </a>
+    <div class="actual_modal" id="popUp">
+        <form action="/tasks" method="post">
 
-                        <!-- Delete Button -->
-                        <a th:href="@{/{id}/delete(id=${task.id})}" id="delete_task" title="Delete the task.">
-                            <i class="fa-solid fa-circle-minus"></i>
-                        </a>
-                    </div>
-                    <th:block th:if="${task.description != ''}">
-                        <p id="main-description" th:text="${task.description}">
-                            This section is for description, related to task.
-                        </p>
-                    </th:block>
+            <h2 class="modal_title">Create a task!</h2>
 
-                </div>
-            </ul>
-        </th:block>
+            <label for="task_title">Title</label>
+            <input type="text" name="title" id="task_title" placeholder="Enter task title" autocomplete="off"
+                   required>
+
+            <label for="task_description">Description</label>
+            <textarea name="task_description" id="task_description" placeholder="Task Description" autocomplete="off"
+                      rows="4" required></textarea>
+
+            <label for="task_date">Due Date</label>
+            <input type="date" name="date" id="task_date">
+
+            <div>
+                <button type="submit" class="modal_button">
+                    Confirm
+                    <ion-icon name="add-circle"></ion-icon>
+                </button>
+            </div>
+        </form>
     </div>
 
+    <div class="task_list">
+        <!--actual card-->
+        <div class="card" th:each="tasks : ${taskList}">
+            <div class="card_body">
+                <div class="title_date">
+                    <span class="title" th:text="${tasks.title}">Task One title!</span>
+                    <span class="date">20-11-2024</span>
+                </div>
+                <div class="hr"></div>
+                <p class="card_description" th:text="${tasks.description}">
+                    Sort and arrange your books by genre, author, or color to create a neat and visually appealing
+                    bookshelf. Consider adding bookends for stability and maybe a few decorative items to
+                    personalize the space.
+                </p>
+                <div class="card_buttons">
+                    <a class="modal_button" id="complete" th:href="@{/{id}/toggle(id=${tasks.id})}">
+                        Complete
+                        <ion-icon name="checkmark-circle"></ion-icon>
+                    </a>
+
+                    <a class="modal_button" id="delete" th:href="@{/{id}/delete(id=${tasks.id})}">
+                        Delete
+                        <ion-icon name="close-circle"></ion-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script th:src="@{/script/app.js}" defer></script>
 </body>
 
 </html>
