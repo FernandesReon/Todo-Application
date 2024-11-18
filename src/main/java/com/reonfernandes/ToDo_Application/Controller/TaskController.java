@@ -30,9 +30,10 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public String createTask(@RequestParam String title, @RequestParam String task_description){
+    public String createTask(@RequestParam String title, @RequestParam String task_description,
+                             @RequestParam(required = false) LocalDate date){
         LOGGER.info("(Controller) Create Task..");
-        taskService.createTask(title, task_description);
+        taskService.createTask(title, task_description, date);
         return "redirect:/tasks";
     }
 

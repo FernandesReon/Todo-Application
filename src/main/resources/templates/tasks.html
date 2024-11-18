@@ -46,12 +46,14 @@
         <!--actual card-->
         <div class="card" th:each="tasks : ${taskList}">
             <div class="card_body">
-                <div class="title_date">
-                    <span class="title" th:text="${tasks.title}">Task One title!</span>
-                    <span class="date">20-11-2024</span>
+                <div class="title_date" th:classappend="${tasks.completed} ? 'completed_task' : ''">
+                    <p class="title" th:text="${tasks.title}">Task One title!</p>
+                    <p class="date" th:text="${tasks.date}">20-11-2024</p>
                 </div>
                 <div class="hr"></div>
-                <p class="card_description" th:text="${tasks.description}">
+                <p class="card_description" th:text="${tasks.description}"
+                   th:classappend="${tasks.completed} ? 'completed_task' : ''"
+                >
                     Sort and arrange your books by genre, author, or color to create a neat and visually appealing
                     bookshelf. Consider adding bookends for stability and maybe a few decorative items to
                     personalize the space.
