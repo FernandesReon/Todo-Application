@@ -5,11 +5,12 @@
 }
 
 :root{
-    --text-color: #F9FAFB;
-    --background-color: #121212;
-    --accent-color: #7B679A;
-    --task-box: #36393F;
-    --complete-text: #00ffc4;
+    --text-color: #E0E0E0;
+    --background-color: #1C1C1E;
+    --accent-color: #644eb0;
+    --task-box: #2C2C2E;
+    --complete-text: #3BCF9E;
+
 }
 
 html {
@@ -48,7 +49,6 @@ ion-icon{
     max-width: 60.35rem;
     padding: 1rem;
     border-radius: 0.4rem;
-    background: var(--task-box);
     transition: 0.5s;
 }
 
@@ -121,6 +121,10 @@ form textarea{
 
 form label{
     font-size: 0.85rem;
+}
+
+form #task_date{
+    width: 50%;
 }
 
 form textarea{
@@ -198,10 +202,6 @@ form textarea{
 
 #delete{
     background: red;
-}
-
-.modal_button:hover {
-    background: #6a5788;
 }
 
 #complete:hover {
