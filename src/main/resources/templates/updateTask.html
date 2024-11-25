@@ -10,7 +10,7 @@
 <section id="content">
     <h1 class="project_name">Update Task</h1>
     <div class="container">
-        <form th:action="@{/updateTask}" th:object="${task}" method="post" class="update_modal">
+        <form th:action="@{/updateTask}" method="post" class="update_modal" th:object="${task}">
             <input type="hidden" th:field="*{id}" /> <!-- Hidden ID field -->
 
             <label for="task_title">Title</label>
@@ -24,6 +24,7 @@
 
             <button type="submit" class="modal_button">Update Task</button>
         </form>
+
     </div>
 </section>
 </body>
