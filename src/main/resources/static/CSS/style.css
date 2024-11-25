@@ -20,14 +20,6 @@ html {
 body {
     font-family: 'JetBrains Mono', monospace;
     font-weight: 400;
-    background: var(--background-color);
-    color: var(--text-color);
-    min-height: 100vh;
-    padding: 0.6rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 button,
@@ -42,6 +34,17 @@ a {
 
 ion-icon{
     font-size: 1.2rem;
+}
+
+#content{
+    background: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    padding: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .container{
@@ -77,15 +80,19 @@ ion-icon{
 
 .actual_modal{
     display: none;
+    transition: 0.5s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.actual_modal,
+.update_modal{
     width: 100%;
-    max-width: 500px;
+    max-width: 600px;
     padding: 0.6rem;
     margin-top: 0.5rem;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 0.4rem;
-    transition: 0.5s;
-    opacity: 0;
-    visibility: hidden;
 }
 
 .actual_modal.active{

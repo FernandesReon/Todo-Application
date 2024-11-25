@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="parent(content, title)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="A simple and efficient ToDo application built using Spring Boot. This project
+                demonstrates my skills in backend development, RESTful APIs, and database integration.">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title th:replace="${title}">Base Page | Todo App</title>
+</head>
+<body>
+<!--Dynamic content-->
+<section th:replace="${content}"></section>
+
+<!--Scripts-->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script th:src="@{/script/app.js}"></script>
+</body>
+</html>

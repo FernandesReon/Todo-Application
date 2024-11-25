@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
@@ -47,5 +49,20 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid task id"));
         task.setCompleted(!task.isCompleted());
         taskRepository.save(task);
+    }
+
+    @Override
+    public void updateTask(Long id, String title, String task_description, LocalDate date) {
+        Task task = getTaskById(id);
+        task.setTitle(title);
+        task.setDescription(task_description);
+        task.setDate(date);
+        taskRepository.save(task);
+    }
+
+    @Override
+    public Task getTaskById(Long id) {
+        return taskRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("Task not found with id:" + id));
     }
 }

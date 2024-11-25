@@ -19,4 +19,8 @@ public class Task {
     private String description;
     private LocalDate date;
     private boolean completed;
+
+//    public Task(LocalDate date) {
+//        this.date = date;
+//    }
 }
