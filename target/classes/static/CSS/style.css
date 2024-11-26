@@ -10,7 +10,6 @@
     --accent-color: #644eb0;
     --task-box: #2C2C2E;
     --complete-text: #3BCF9E;
-
 }
 
 html {
@@ -63,7 +62,6 @@ ion-icon{
 }
 
 .modal_button{
-    display: inline-block;
     padding: 0.6rem;
     border: none;
     border-radius: 0.5rem;
@@ -127,16 +125,29 @@ form textarea{
 }
 
 form label{
+    display: block;
     font-size: 0.85rem;
-}
-
-form #task_date{
-    width: 50%;
+    margin-bottom: 0.3rem;
 }
 
 form textarea{
     resize: none;
 }
+
+#date_time{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+#date_time input[type="date"],
+#date_time input[type="time"]{
+    background: var(--accent-color);
+    cursor: pointer;
+}
+
 
 .task_list{
     display: block;
@@ -172,7 +183,13 @@ form textarea{
     gap: 0.4rem;
 }
 
-.date{
+.title_date div{
+    display: flex;
+    gap: 1rem;
+}
+
+.date,
+.time{
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--complete-text);

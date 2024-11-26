@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Controller
@@ -31,9 +32,10 @@ public class TaskController {
 
     @PostMapping("/tasks")
     public String createTask(@RequestParam String title, @RequestParam String task_description,
-                             @RequestParam(required = false) LocalDate date) {
+                             @RequestParam(required = false) LocalDate date,
+                             @RequestParam(required = false)LocalTime time) {
         LOGGER.info("(Controller) Creating a new task with title: {}", title);
-        taskService.createTask(title, task_description, date);
+        taskService.createTask(title, task_description, date, time);
         LOGGER.debug("(Controller) Task '{}' created successfully.", title);
         return "redirect:/tasks";
     }
@@ -61,6 +63,7 @@ public class TaskController {
         if (task != null) {
             LOGGER.debug("(Controller) Task with ID {} found: {}", id, task);
             model.addAttribute("task", task);
+            System.out.println(task);
             return "updateTask";
         } else {
             LOGGER.warn("(Controller) Task with ID {} not found.", id);
@@ -71,7 +74,7 @@ public class TaskController {
     @PostMapping("/updateTask")
     public String updateTask(@ModelAttribute Task task) {
         LOGGER.info("(Controller) Updating task with ID: {}", task.getId());
-        taskService.updateTask(task.getId(), task.getTitle(), task.getDescription(), task.getDate());
+        taskService.updateTask(task.getId(), task.getTitle(), task.getDescription(), task.getDate(), task.getTime());
         LOGGER.debug("(Controller) Task with ID {} updated successfully.", task.getId());
         return "redirect:/tasks";
     }

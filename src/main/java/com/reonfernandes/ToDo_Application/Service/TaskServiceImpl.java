@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,12 +27,13 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void createTask(String title, String task_description,
-                           LocalDate date) {
+                           LocalDate date, LocalTime time) {
         LOGGER.info("New Task Created..");
         Task task = new Task();
         task.setTitle(title);
         task.setDescription(task_description);
         task.setDate(date);
+        task.setTime(time);
         task.setCompleted(false);
         taskRepository.save(task);
     }
@@ -52,11 +54,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void updateTask(Long id, String title, String task_description, LocalDate date) {
+    public void updateTask(Long id, String title, String task_description, LocalDate date, LocalTime time) {
         Task task = getTaskById(id);
         task.setTitle(title);
         task.setDescription(task_description);
         task.setDate(date);
+        task.setTime(time);
         taskRepository.save(task);
     }
 

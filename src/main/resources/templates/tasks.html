@@ -9,7 +9,7 @@
 
 <body>
 <section id="content">
-    <h1 class="project_name">Todo App</h1>
+    <h1 class="project_name">Todo Application</h1>
     <div class="container">
         <button class="modal_button" onclick="openModal()">
             Add task
@@ -29,8 +29,17 @@
                 <textarea name="task_description" id="task_description" placeholder="Task Description" autocomplete="off"
                           rows="4" required></textarea>
 
-                <label for="task_date">Due Date</label>
-                <input type="date" name="date" id="task_date">
+                <div id="date_time">
+                    <div class="date_">
+                        <label for="task_date">Due Date</label>
+                        <input type="date" name="date" id="task_date">
+                    </div>
+
+                    <div class="time_">
+                        <label for="task_time">Time</label>
+                        <input type="time" name="time" id="task_time">
+                    </div>
+                </div>
 
                 <div>
                     <button type="submit" class="modal_button">
@@ -47,7 +56,10 @@
                 <div class="card_body">
                     <div class="title_date" th:classappend="${tasks.completed} ? 'completed_task' : ''">
                         <p class="title" th:text="${tasks.title}">Task One title!</p>
-                        <p class="date" th:text="${tasks.date}">20-11-2024</p>
+                        <div>
+                            <p class="date" th:text="${tasks.date}">20-11-2024</p>
+                            <p class="time" th:text="${tasks.time}">05:00 AM</p>
+                        </div>
                     </div>
                     <div class="hr"></div>
                     <p class="card_description" th:text="${tasks.description}"

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @Entity
@@ -15,11 +16,17 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "todo_title", nullable = false)
+    @Column(nullable = false)
     private String title;
+
+    @Column(length = 1000)
     private String description;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
-    private boolean completed;
 
+    @DateTimeFormat(pattern = "HH:mm:ss") // Time in 12-hour format with AM/PM
+    private LocalTime time;
+
+    private boolean completed;
 }

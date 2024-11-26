@@ -17,12 +17,28 @@
             <input type="text" th:field="*{title}" id="task_title" placeholder="Enter task title" required />
 
             <label for="task_description">Description</label>
-            <textarea th:field="*{description}" id="task_description" placeholder="Task Description" rows="4" required></textarea>
+            <textarea th:field="*{description}" id="task_description" placeholder="Task Description" rows="4" required>
 
-            <label for="task_date">Due Date</label>
-            <input type="date" th:field="*{date}" id="task_date" />
+            </textarea>
 
-            <button type="submit" class="modal_button">Update Task</button>
+            <div id="date_time">
+                <div class="date_">
+                    <label for="task_date">Due Date</label>
+                    <input th:field="*{date}" type="date" id="task_date">
+                </div>
+
+                <div class="time_">
+                    <label for="task_time">Time</label>
+                    <input th:field="*{time}" type="time" id="task_time">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="modal_button" id="update_button">
+                    Update Task
+                    <ion-icon name="reload-circle"></ion-icon>
+                </button>
+            </div>
         </form>
 
     </div>
