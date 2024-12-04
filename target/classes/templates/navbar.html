@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="navigation">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/responsive.css}">
+
+    <title>Navbar</title>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <!--            <div class="logo">-->
+        <!--                <span class="logo-name">To-Do</span>-->
+        <!--            </div>-->
+
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li>
+                    <a th:href="@{/tasks/home}" class="nav-link">Home</a>
+                </li>
+                <li>
+                    <a th:href="@{/tasks/about}" class="nav-link">About</a>
+                </li>
+                <li>
+                    <a th:href="@{/tasks/contact}" class="nav-link">Contact</a>
+                </li>
+
+                <div class="connect-buttons">
+                    <a th:href="@{/tasks/login}" class="button">Login</a>
+                    <a th:href="@{/tasks/register}" class="button">Register</a>
+                </div>
+            </ul>
+        </nav>
+
+        <div class="mobile-view">
+            <ion-icon name="grid" class="icon"></ion-icon>
+            <ion-icon name="close-circle" class="icon"></ion-icon>
+        </div>
+    </div>
+</header>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script th:src="@{/script/app.js}" defer></script>
+</body>
+</html>

@@ -1,81 +1,103 @@
 package com.reonfernandes.ToDo_Application.Controller;
 
+import com.reonfernandes.ToDo_Application.Model.Priority;
 import com.reonfernandes.ToDo_Application.Model.Task;
-import com.reonfernandes.ToDo_Application.Service.TaskService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.reonfernandes.ToDo_Application.Service.impl.TaskServicesImpl;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @Controller
+@RequestMapping("/tasks")
 public class TaskController {
-    private final TaskService taskService;
-    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
+    private final TaskServicesImpl taskServices;
+
+    public TaskController(TaskServicesImpl taskServices) {
+        this.taskServices = taskServices;
     }
 
-    @GetMapping("/tasks")
-    public String getAllTasks(Model model) {
-        LOGGER.info("(Controller) Fetching all tasks...");
-        List<Task> tasks = taskService.getAllTasks();
-        LOGGER.debug("(Controller) Number of tasks fetched: {}", tasks.size());
-        model.addAttribute("taskList", tasks);
+    @GetMapping("/home")
+    public String homePage(Model model){
+        List<Task> allTask = taskServices.getAllTasks();
+        model.addAttribute("allTask", allTask);
         return "tasks";
     }
 
-    @PostMapping("/tasks")
-    public String createTask(@RequestParam String title, @RequestParam String task_description,
-                             @RequestParam(required = false) LocalDate date,
-                             @RequestParam(required = false)LocalTime time) {
-        LOGGER.info("(Controller) Creating a new task with title: {}", title);
-        taskService.createTask(title, task_description, date, time);
-        LOGGER.debug("(Controller) Task '{}' created successfully.", title);
-        return "redirect:/tasks";
+    @GetMapping("/about")
+    public String aboutPage(){
+        return "about";
     }
 
-    @GetMapping("/{id}/delete")
-    public String deleteTask(@PathVariable Long id) {
-        LOGGER.info("(Controller) Deleting task with ID: {}", id);
-        taskService.deleteTask(id);
-        LOGGER.debug("(Controller) Task with ID {} deleted successfully.", id);
-        return "redirect:/tasks";
+    @GetMapping("/contact")
+    public String contactPage(){
+        return "contact";
     }
 
-    @GetMapping("/{id}/toggle")
-    public String toggleTask(@PathVariable Long id) {
-        LOGGER.info("(Controller) Toggling completion status for task with ID: {}", id);
-        taskService.toggleTask(id);
-        LOGGER.debug("(Controller) Task with ID {} toggled successfully.", id);
-        return "redirect:/tasks";
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
     }
 
-    @GetMapping("/updateTaskPage/{id}")
-    public String updateTask(@PathVariable Long id, Model model) {
-        LOGGER.info("(Controller) Fetching task with ID: {} for update", id);
-        Task task = taskService.getTaskById(id);
-        if (task != null) {
-            LOGGER.debug("(Controller) Task with ID {} found: {}", id, task);
+    @GetMapping("/register")
+    public String registerPage(){
+        return "register";
+    }
+
+    @GetMapping("/createTask")
+    public String createTask(Model model){
+        Task task = new Task();
+        task.setPriority(Priority.MEDIUM);
+        model.addAttribute("task", task);
+        return "createTask";
+    }
+
+    @PostMapping("/process-form")
+    public String processingForm(@Valid @ModelAttribute("task") Task task, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             model.addAttribute("task", task);
-            System.out.println(task);
-            return "updateTask";
-        } else {
-            LOGGER.warn("(Controller) Task with ID {} not found.", id);
-            return "redirect:/tasks";
+            return "createTask";
         }
+
+        if (task.getPriority() == null) {
+            task.setPriority(Priority.MEDIUM);
+        }
+
+        taskServices.createTask(task);
+        return "redirect:/tasks/home";
     }
 
-    @PostMapping("/updateTask")
-    public String updateTask(@ModelAttribute Task task) {
-        LOGGER.info("(Controller) Updating task with ID: {}", task.getId());
-        taskService.updateTask(task.getId(), task.getTitle(), task.getDescription(), task.getDate(), task.getTime());
-        LOGGER.debug("(Controller) Task with ID {} updated successfully.", task.getId());
-        return "redirect:/tasks";
+    @GetMapping("/toggleTask/{id}")
+    public String toggleTask(@PathVariable Long id){
+        taskServices.toggleTask(id);
+        return "redirect:/tasks/home";
     }
+
+    @GetMapping("/deleteTask/{id}")
+    public String deleteTask(@PathVariable Long id){
+        taskServices.deleteTask(id);
+        return "redirect:/tasks/home";
+    }
+
+    @GetMapping("/updateTask/{id}")
+    public String updateTask(@PathVariable Long id, Model model){
+        Task task = taskServices.getTaskById(id);
+        model.addAttribute("task", task);
+        return "updateTask";
+    }
+
+    @PostMapping("/updateTaskForm/{id}")
+    public String updateTaskForm(@Valid @ModelAttribute("task") Task task,
+                                 BindingResult result){
+        if (result.hasErrors()){
+            return "updateTask";
+        }
+        taskServices.updateTask(task, task.getId());
+        return "redirect:/tasks/home";
+    }
+
 }

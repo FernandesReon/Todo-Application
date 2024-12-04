@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
+
+<head>
+    <title>Contact Page</title>
+</head>
+
+<body>
+    <div id="content">
+        <div th:replace="~{navbar :: navigation}"></div>
+        <div class="container">
+            <div class="contact_us">
+                <!-- contact ka header section -->
+                <div class="contact_header">
+                    <div class="title">
+                        <h2>Contact Us</h2>
+                    </div>
+                    <p>
+                        We use an agile approach to test assumptions and connect with the needs of your audience early and
+                        often.
+                    </p>
+                </div>
+                <!-- contact ka body -->
+                <div class="contact_body">
+                    <div class="contact_us_form">
+
+                        <form action="#" method="post">
+
+                            <!-- first and last name -->
+                            <div class="form_group">
+
+                                <div class="form_input">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" name="fname" id="fname" placeholder="Reon" autocomplete="off"
+                                           required>
+                                </div>
+
+                                <div class="form_input">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" name="lname" id="lname" placeholder="Fernandes" autocomplete="off"
+                                           required>
+                                </div>
+
+                            </div>
+
+                            <!-- email and phone  -->
+                            <div class="form_group">
+
+                                <div class="form_input">
+                                    <label for="email">Your Email</label>
+                                    <input type="email" name="email" id="email" placeholder="reondias@gmail.com"
+                                           autocomplete="off" required>
+                                </div>
+
+                                <div class="form_input">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" name="phone" id="phone" placeholder="+12 345 6789"
+                                           autocomplete="off">
+                                </div>
+
+                            </div>
+
+                            <div class="form_input">
+                                <label for="feedback">Your message</label>
+                                <textarea name="feedback" id="feedback" rows="5" placeholder="Leave a comment"
+                                          autocomplete="off"></textarea>
+
+                                <p>
+                                    By submitting this form you agree to our <a href="#">terms and conditions</a> and our
+                                    <a href="#">privacy policy</a>
+                                    which explains how we may collect, use and disclose your personal information including
+                                    to third parties.
+                                </p>
+                            </div>
+
+                            <div class="submit">
+                                <button type="submit">Send message</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="contact_details">
+
+                        <div class="info_container">
+                            <div class="info_icon">
+                                <ion-icon name="location"></ion-icon>
+                            </div>
+                            <div class="info_title">Address:</div>
+                            <div class="info_para">
+                                <p>
+                                    A/B 003, ground floor, Pandurang Sumrti,
+                                    Big Carpentry, Tamtalao, Vasai(W), 401201.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="info_container">
+                            <div class="info_icon">
+                                <ion-icon name="call"></ion-icon>
+                            </div>
+                            <div class="info_title">Call us:</div>
+                            <div class="info_para">
+                                <p>
+                                    Call us to speak to a member of our team. We are always happy to help.
+                                </p>
+                                <p class="phone_number">+1 (646) 786-5060</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

@@ -7,7 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="A simple and efficient ToDo application built using Spring Boot. This project
                 demonstrates my skills in backend development, RESTful APIs, and database integration.">
+
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/responsive.css}">
+
     <title th:replace="${title}">Base Page | Todo App</title>
 </head>
 <body>
@@ -17,6 +20,6 @@
 <!--Scripts-->
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script th:src="@{/script/app.js}"></script>
+<script th:src="@{/script/app.js}" defer></script>
 </body>
 </html>

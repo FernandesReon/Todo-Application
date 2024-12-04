@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+<div id="content">
+    <div th:replace="~{navbar :: navigation}"></div>
+    <section>
+        <main class="login_page" id="login">
+            <div class="container">
+
+                <div class="form_container">
+
+                    <form action="#" method="post" class="access">
+                        <div class="login_header">
+                            <div class="title">
+                                <h2>Contact Us</h2>
+                            </div>
+                            <p>
+                                Start your website in seconds. Don't have an account? <a href="register.html">Sign up.</a>
+                            </p>
+                        </div>
+
+                        <div class="login_body">
+                            <div class="login_group">
+                                <div class="form_input">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" id="email" placeholder="reondias@gmail.com"
+                                           autocomplete="off" required>
+                                    <!-- <span class="alert">Correct</span> -->
+                                </div>
+
+                                <div class="form_input">
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" id="password" placeholder="*********"
+                                           autocomplete="off">
+                                    <!-- <span class="alert">Correct</span> -->
+                                </div>
+                            </div>
+
+                            <div class="or_divider">
+                                <div class="hr"></div>
+                                <span>or</span>
+                                <div class="hr"></div>
+                            </div>
+
+                            <div class="social_buttons">
+                                <button type="button">
+                                    <img th:src="@{/images/google-original.svg}" alt="Google Icon">
+                                    Sign in with Google
+                                </button>
+
+                                <button type="button">
+                                    <img th:src="@{/images/github-original.svg}" alt="GitHub Icon">
+                                    Sign in with GitHub
+                                </button>
+                            </div>
+
+                            <div class="forgot">
+                                <a href="#">Forgot password?</a>
+                            </div>
+
+                            <div class="login_submit">
+                                <button type="submit">
+                                    Sign in to your account
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </main>
+    </section>
+</div>
+</body>
+</html>

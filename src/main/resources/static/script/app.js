@@ -1,32 +1,36 @@
-// Select necessary elements
-const popUpModal = document.getElementById('popUp');
-const taskList = document.querySelector('.task_list');
+// mobile navigation
+const mobileView = document.querySelector(".mobile-view");
+const desktopView = document.querySelector(".navbar");
+const gridIcon = document.querySelector(".icon[name='grid']");
+const closeIcon = document.querySelector(".icon[name='close-circle']");
 
-// Function to open the modal
-function openModal() {
-    popUpModal.classList.add("active");
-    taskList.classList.add("hidden");
+const toggleNavbar = ()=>{
+    desktopView.classList.toggle("active");
 
-    // Focus on the modal for accessibility
-    popUpModal.focus();
-}
-
-// Function to close the modal
-function closeModal(event) {
-    // Prevent default form submission if used on a button inside a form
-    if (event) event.preventDefault();
-
-    popUpModal.classList.remove("active");
-    taskList.classList.remove("hidden");
-}
-
-// Event listener for 'Escape' key to close the modal
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape' && popUpModal.classList.contains("active")) {
-        closeModal();
+    if(desktopView.classList.contains("active")){
+        gridIcon.style.display = "none";
+        closeIcon.style.display = "block";
     }
-});
+    else{
+        gridIcon.style.display = "block";
+        closeIcon.style.display = "none";
+    }
+}
+mobileView.addEventListener("click", () => toggleNavbar());
 
-// Adding event listeners for buttons if needed (optional)
-document.querySelector('.modal_button').addEventListener('click', openModal);
-document.querySelector('.modal_button[onclick="closeModal()"]').addEventListener('click', closeModal);
+
+// card dropdown
+function toggleDropdown(button) {
+    const dropdown = button.parentElement;
+    dropdown.classList.toggle('active');
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', (e) => {
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+});

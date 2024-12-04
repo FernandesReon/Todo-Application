@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
 <head>
-    <title>Update Task!</title>
+    <title>Add Task!</title>
 </head>
 
 <body>
@@ -13,36 +13,36 @@
         <div class="sub-container">
 
             <div class="add-todo-form">
-                <h1 class="todo-title">Update Task</h1>
+                <h1 class="todo-title">Add Task</h1>
                 <ion-icon
                         name="close-circle" class="icon"
                         th:onclick="|window.location.href='@{/tasks/home}'|"
                 ></ion-icon>
 
-                <form action="/tasks/updateTaskForm/{id}" method="post" th:object="${task}" role="form" novalidate>
-                    <input type="hidden" th:field="*{id}">
+                <form action="/tasks/process-form" method="post" th:object="${task}" role="form" novalidate>
+
                     <div class="input-field">
                         <label for="title">Title</label>
-                        <input th:field="*{title}" type="text" name="title" id="title" placeholder="Enter task title..." autocomplete="off"
+                        <input type="text" name="title" id="title" placeholder="Enter task title..."
+                               autocomplete="off"
                                required>
                         <p class="validation"
-                           th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
-                    </div>
+                           th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title is required.</p></div>
 
                     <div class="input-field-group">
                         <div class="input-field">
                             <label for="date">Date</label>
-                            <input th:field="*{date}" type="date" name="date" id="date">
+                            <input type="date" name="date" id="date">
                         </div>
 
                         <div class="input-field">
                             <label for="time">Time</label>
-                            <input th:field="*{time}" type="time" name="time" id="time">
+                            <input type="time" name="time" id="time">
                         </div>
 
                         <div class="input-field">
                             <label for="priority">Priority</label>
-                            <select name="priority" id="priority" th:field="*{priority}" required>
+                            <select name="priority" id="priority" required>
                                 <option value="" disabled selected>Choose your priority</option>
                                 <option value="CRITICAL">Critical</option>
                                 <option value="HIGH">High</option>
@@ -54,14 +54,14 @@
 
                     <div class="input-field">
                         <label for="description">Description</label>
-                        <textarea th:field="*{description}"  name="description" id="description" cols="30" rows="10"
+                        <textarea name="description" id="description" cols="30" rows="10"
                                   placeholder="Additional Information" autocomplete="off"></textarea>
                         <p class="validation" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
                             Maximum characters upto 1000.</p>
                     </div>
 
                     <div class="add-task">
-                        <button type="submit" class="button">Update</button>
+                        <button type="submit" class="button">Confirm</button>
                     </div>
                 </form>
             </div>
@@ -69,5 +69,4 @@
     </div>
 </div>
 </body>
-
 </html>

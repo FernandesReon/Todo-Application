@@ -1,96 +1,94 @@
 <!DOCTYPE html>
-<html
-        lang="en"
-        xmlns:th="https://www.thymeleaf.org"
-        th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
+
 <head>
-    <title>ToDo App</title>
+    <title>To-Do App</title>
 </head>
 
 <body>
-<section id="content">
-    <h1 class="project_name">Todo Application</h1>
-    <div class="container">
-        <button class="modal_button" onclick="openModal()">
-            Add task
-            <ion-icon name="add-circle"></ion-icon>
-        </button>
-
-        <div class="actual_modal" id="popUp">
-            <form action="/tasks" method="post">
-
-                <h2 class="modal_title">Create a task!</h2>
-
-                <label for="task_title">Title</label>
-                <input type="text" name="title" id="task_title" placeholder="Enter task title" autocomplete="off"
-                       required>
-
-                <label for="task_description">Description</label>
-                <textarea name="task_description" id="task_description" placeholder="Task Description" autocomplete="off"
-                          rows="4" required></textarea>
-
-                <div id="date_time">
-                    <div class="date_">
-                        <label for="task_date">Due Date</label>
-                        <input type="date" name="date" id="task_date">
-                    </div>
-
-                    <div class="time_">
-                        <label for="task_time">Time</label>
-                        <input type="time" name="time" id="task_time">
-                    </div>
+<div id="content">
+    <div th:replace="~{navbar :: navigation}"></div>
+    <section class="home" id="home">
+        <div class="container">
+            <div class="task-header">
+                <div class="personal-info">
+                    <p class="name">Name of user</p>
+                    <span class="user-name">@username</span>
                 </div>
 
-                <div>
-                    <button type="submit" class="modal_button">
-                        Confirm
-                        <ion-icon name="add-circle"></ion-icon>
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <div class="task_list">
-            <!--actual card-->
-            <div class="card" th:each="tasks : ${taskList}">
-                <div class="card_body">
-                    <div class="title_date" th:classappend="${tasks.completed} ? 'completed_task' : ''">
-                        <p class="title" th:text="${tasks.title}">Task One title!</p>
-                        <div>
-                            <p class="date" th:text="${tasks.date}">20-11-2024</p>
-                            <p class="time" th:text="${tasks.time}">05:00 AM</p>
-                        </div>
-                    </div>
-                    <div class="hr"></div>
-                    <p class="card_description" th:text="${tasks.description}"
-                       th:classappend="${tasks.completed} ? 'completed_task' : ''"
-                    >
-                        Sort and arrange your books by genre, author, or color to create a neat and visually appealing
-                        bookshelf. Consider adding bookends for stability and maybe a few decorative items to
-                        personalize the space.
-                    </p>
-                    <div class="card_buttons">
-                        <a class="modal_button" id="complete" th:href="@{/{id}/toggle(id=${tasks.id})}">
-                            Complete
-                            <ion-icon name="checkmark-circle"></ion-icon>
-                        </a>
-
-                        <a class="modal_button" id="delete" th:href="@{/{id}/delete(id=${tasks.id})}">
-                            Delete
-                            <ion-icon name="close-circle"></ion-icon>
-                        </a>
-
-                        <a class="modal_button" id="update" th:href="@{/updateTaskPage/{id} (id=${tasks.id})}">
-                            Update
-                            <ion-icon name="reload-circle"></ion-icon>
-                        </a>
-                    </div>
+                <div class="add">
+                    <a th:href="@{/tasks/createTask}" class="button">
+                        <ion-icon name="add-circle" class="icon"></ion-icon>
+                        Add Task
+                    </a>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <div class="todo-cards">
+        <div class="container">
+            <div class="card-list">
+
+                <div class="card" th:each="taskCards : ${allTask}"
+                     th:classappend="${taskCards.isCompleted()} ? 'completed-task' : ''">
+
+                    <div class="card_body">
+                        <p class="title" th:text="${taskCards.title}">Task One title!</p>
+
+                        <div class="dropdown">
+                            <ion-icon name="ellipsis-vertical-outline" id="action-btn"
+                                      onclick="toggleDropdown(this)"></ion-icon>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" id="complete"
+                                   th:href="@{/tasks/toggleTask/{id} (id=${taskCards.id})}">
+                                    Complete
+                                    <ion-icon name="checkmark-circle-outline"></ion-icon>
+                                </a>
+                                <a class="dropdown-item" id="delete"
+                                   th:href="@{/tasks/deleteTask/{id} (id=${taskCards.id})}">
+                                    Delete
+                                    <ion-icon name="close-circle-outline"></ion-icon>
+                                </a>
+                                <a class="dropdown-item" id="update"
+                                   th:href="@{/tasks/updateTask/{id} (id=${taskCards.id})}">
+                                    Update
+                                    <ion-icon name="create-outline"></ion-icon>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="title_date">
+                            <div class="date">
+                                <ion-icon name="calendar-outline"></ion-icon>
+                                <p class="date" th:text="${taskCards.date}">20-11-2024</p>
+                            </div>
+                            <div class="time">
+                                <ion-icon name="time-outline"></ion-icon>
+                                <p class="time" th:text="${taskCards.time}">05:00 AM</p>
+                            </div>
+                        </div>
+
+                        <div class="priority">
+                            <ion-icon name="pulse-outline"></ion-icon>
+                            <p class="priority-level" th:text="${taskCards.priority}">Medium</p>
+                        </div>
+
+                        <p class="card_description" th:text="${taskCards.description}">
+                            Sort and arrange your books by genre, author, or color to create a neat and visually
+                            appealing
+                            bookshelf. Consider adding bookends for stability and maybe a few decorative items to
+                            personalize the space.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-</section>
+</div>
 </body>
 
 </html>
