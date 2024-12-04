@@ -83,7 +83,7 @@ section{
     width: 100%;
     max-width: 80.35rem;
     margin: 0 auto;
-    justify-content: flex-end;
+    justify-content: space-between;
     flex-wrap: wrap;
     min-height: 10vh;
     padding: 0 2rem;

@@ -5,7 +5,7 @@ allowing users to manage their tasks efficiently. This application supports addi
 as well as marking tasks as completed. Designed for easy use, with a responsive UI powered by Thymeleaf templates.
 </p>
 
-![Todo Application](src/main/resources/static/images/Todo_2.png)
+![Todo Application](src/main/resources/static/images/Todo_1.png)
 
 <strong>Features:</strong>
 
@@ -20,4 +20,4 @@ as well as marking tasks as completed. Designed for easy use, with a responsive 
 <span style="font-style: italic">Note: Improvements to be done.</span>
 <br>
 
-![Todo Application input form](src/main/resources/static/images/Todo_1.png)
+![Todo Application input form](src/main/resources/static/images/Todo_2.png)
