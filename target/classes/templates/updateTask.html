@@ -1,47 +1,73 @@
 <!DOCTYPE html>
-<html
-        lang="en"
-        xmlns:th="https://www.thymeleaf.org"
-        th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
 <head>
-    <title>Update Task</title>
+    <title>Update Task!</title>
 </head>
+
 <body>
-<section id="content">
-    <h1 class="project_name">Update Task</h1>
+<div id="content">
     <div class="container">
-        <form th:action="@{/updateTask}" method="post" class="update_modal" th:object="${task}">
-            <input type="hidden" th:field="*{id}" /> <!-- Hidden ID field -->
 
-            <label for="task_title">Title</label>
-            <input type="text" th:field="*{title}" id="task_title" placeholder="Enter task title" required />
+        <div class="sub-container">
 
-            <label for="task_description">Description</label>
-            <textarea th:field="*{description}" id="task_description" placeholder="Task Description" rows="4" required>
+            <div class="add-todo-form">
+                <h1 class="todo-title">Update Task</h1>
+                <ion-icon
+                        name="close-circle" class="icon"
+                        th:onclick="|window.location.href='@{/tasks/home}'|"
+                ></ion-icon>
 
-            </textarea>
+                <form action="/tasks/updateTaskForm/{id}" method="post" th:object="${task}" role="form" novalidate>
+                    <input type="hidden" th:field="*{id}">
+                    <div class="input-field">
+                        <label for="title">Title</label>
+                        <input th:field="*{title}" type="text" name="title" id="title" placeholder="Enter task title..." autocomplete="off"
+                               required>
+                        <p class="validation"
+                           th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+                    </div>
 
-            <div id="date_time">
-                <div class="date_">
-                    <label for="task_date">Due Date</label>
-                    <input th:field="*{date}" type="date" id="task_date">
-                </div>
+                    <div class="input-field-group">
+                        <div class="input-field">
+                            <label for="date">Date</label>
+                            <input th:field="*{date}" type="date" name="date" id="date">
+                        </div>
 
-                <div class="time_">
-                    <label for="task_time">Time</label>
-                    <input th:field="*{time}" type="time" id="task_time">
-                </div>
+                        <div class="input-field">
+                            <label for="time">Time</label>
+                            <input th:field="*{time}" type="time" name="time" id="time">
+                        </div>
+
+                        <div class="input-field">
+                            <label for="priority">Priority</label>
+                            <select name="priority" id="priority" th:field="*{priority}" required>
+                                <option value="" disabled selected>Choose your priority</option>
+                                <option value="CRITICAL">Critical</option>
+                                <option value="HIGH">High</option>
+                                <option value="MEDIUM">Medium</option>
+                                <option value="LOW">Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="description">Description</label>
+                        <textarea th:field="*{description}"  name="description" id="description" cols="30" rows="10"
+                                  placeholder="Additional Information" autocomplete="off"></textarea>
+                        <p class="validation" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+                            Maximum characters upto 1000.</p>
+                    </div>
+
+                    <div class="add-task">
+                        <button type="submit" class="button">Update</button>
+                    </div>
+                </form>
             </div>
-
-            <div>
-                <button type="submit" class="modal_button" id="update_button">
-                    Update Task
-                    <ion-icon name="reload-circle"></ion-icon>
-                </button>
-            </div>
-        </form>
-
+        </div>
     </div>
-</section>
+</div>
 </body>
+
 </html>
